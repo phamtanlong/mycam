@@ -14,18 +14,13 @@
         android:layout_height="fill_parent"
         android:layout_weight="1" />
 
-    <Button
+    <android.support.design.widget.FloatingActionButton
         android:id="@+id/button_capture"
-        style="@android:style/Widget.Material.Light.Button.Small"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:elevation="0dp"
+        android:layout_marginRight="20dp"
+        android:clickable="true"
         android:onClick="onClickCapture"
-        android:paddingBottom="30dp"
-        android:paddingTop="30dp"
-        android:text="Shot"
-        android:textAlignment="center"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

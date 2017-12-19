@@ -1,5 +1,6 @@
 package ptl.mycam;
 
+import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -10,6 +11,7 @@ import android.hardware.Camera; //old
 import android.net.Uri;
 import android.os.Environment;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
@@ -74,6 +76,10 @@ public class CameraActivity extends Activity {
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         setContentView(R.layout.activity_camera);
+
+        ActivityCompat.requestPermissions(CameraActivity.this,
+                new String[]{ Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE },
+                1);
 
         // Create an instance of Camera
         mCamera = getCameraInstance();
