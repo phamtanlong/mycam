@@ -9,7 +9,6 @@ import android.hardware.Camera; //old
 //import android.graphics.Camera; //new
 import android.net.Uri;
 import android.os.Environment;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -26,8 +25,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
-import static android.provider.MediaStore.Files.FileColumns.MEDIA_TYPE_IMAGE;
 
 public class CameraActivity extends Activity {
 
@@ -86,11 +83,21 @@ public class CameraActivity extends Activity {
         FrameLayout preview = findViewById(R.id.camera_preview);
         preview.addView(mPreview);
 
-        setupFocus();
+        setupAutoFocus();
+        setupFocusOnTap();
     }
     private static  final int FOCUS_AREA_SIZE= 300;
 
-    private void setupFocus () {
+    private void setupAutoFocus () {
+        Camera.Parameters params = mCamera.getParameters();
+        if (params.getSupportedFocusModes().contains(
+                Camera.Parameters.FOCUS_MODE_CONTINUOUS_VIDEO)) {
+            params.setFocusMode(Camera.Parameters.FOCUS_MODE_CONTINUOUS_VIDEO);
+        }
+        mCamera.setParameters(params);
+    }
+
+    private void setupFocusOnTap() {
         mPreview.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
